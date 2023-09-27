@@ -27,7 +27,7 @@ const config: Config = {
 				fill: "#8624A8",
 				"light-blue": "#F7F7FC",
 				orange: "#FF6715",
-				"light-green": "#43CC74",
+				"accent-green": "#43CC74",
 				"accent-red": "#F7473E",
 				"image-placeholder": "#EEEEEE",
 			},
