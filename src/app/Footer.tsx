@@ -3,7 +3,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/f
 type Props = {};
 function Footer({}: Props) {
 	return (
-		<footer className="w-full bg-heroBg bg-center">
+		<footer className="w-full bg-footerBg bg-center">
 			<div className="container mx-auto">
 				<div className="py-20 flex flex-col divide-y-2 divide-solid gap-y-10">
 					<div>

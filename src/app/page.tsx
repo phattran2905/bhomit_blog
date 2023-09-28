@@ -104,6 +104,82 @@ export default function Home() {
 										</a>
 									</div>
 								</div>
+								{/* Post 3 */}
+								<div className="bg-white p-5 flex flex-row gap-x-9 rounded-lg">
+									<div className="basis-1/3 min-w-[296px] min-h-[324px] bg-image-placeholder overflow-hidden rounded-lg">
+										<div className=""></div>
+									</div>
+									<div className="basis-2/3 flex flex-col justify-between items-start gap-y-4 py-1">
+										<div>
+											<span className="px-7 py-[7px] text-[15px] font-medium uppercase rounded-sm bg-accent-green bg-opacity-25 text-accent-green shadow-sm">
+												Travel
+											</span>
+										</div>
+										<h2 className="font-semibold text-[32px] leading-[43px] my-3">
+											10 Days in Tokyo
+										</h2>
+										<div className="flex flex-row gap-x-4 items-center">
+											<div className="w-[40px] h-[40px] bg-image-placeholder overflow-hidden rounded-full"></div>
+											<span className="text-title-color font-semibold font-heading">
+												Joe Iskandar
+											</span>
+											<div className="relative after:absolute after:content-[''] after:w-[10px] after:h-[10px] after:top-2 after:left-1 after:bg-disable-color after:rounded-full">
+												<span className="pl-6 text-in-field-color text-[14px]">June 12, 2021</span>
+											</div>
+										</div>
+										<p className="text-body-color leading-[26px] my-2">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa ex, magnam
+											sapiente corrupti ab officia unde accusantium pariatur quia doloribus
+											excepturi in inventore consequuntur minus? Ut officia exercitationem modi
+											hic.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa ex, mag
+											excepturi in inventore consequuntur minus? Ut officia exercitationem modi hic.
+										</p>
+										<a
+											href="#"
+											className="capitalize text-accent-green hover:text-primary transition-colors flex flex-row items-center"
+										>
+											Read more <FaChevronRight className="ml-1" />
+										</a>
+									</div>
+								</div>
+								{/* Post 4 */}
+								<div className="bg-white p-5 flex flex-row gap-x-9 rounded-lg">
+									<div className="basis-1/3 min-w-[296px] min-h-[324px] bg-image-placeholder overflow-hidden rounded-lg">
+										<div className=""></div>
+									</div>
+									<div className="basis-2/3 flex flex-col justify-between items-start gap-y-4 py-1">
+										<div>
+											<span className="px-7 py-[7px] text-[15px] font-medium uppercase rounded-sm bg-accent-green bg-opacity-25 text-accent-green shadow-sm">
+												Travel
+											</span>
+										</div>
+										<h2 className="font-semibold text-[32px] leading-[43px] my-3">
+											10 Days in Tokyo
+										</h2>
+										<div className="flex flex-row gap-x-4 items-center">
+											<div className="w-[40px] h-[40px] bg-image-placeholder overflow-hidden rounded-full"></div>
+											<span className="text-title-color font-semibold font-heading">
+												Joe Iskandar
+											</span>
+											<div className="relative after:absolute after:content-[''] after:w-[10px] after:h-[10px] after:top-2 after:left-1 after:bg-disable-color after:rounded-full">
+												<span className="pl-6 text-in-field-color text-[14px]">June 12, 2021</span>
+											</div>
+										</div>
+										<p className="text-body-color leading-[26px] my-2">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa ex, magnam
+											sapiente corrupti ab officia unde accusantium pariatur quia doloribus
+											excepturi in inventore consequuntur minus? Ut officia exercitationem modi
+											hic.Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa ex, mag
+											excepturi in inventore consequuntur minus? Ut officia exercitationem modi hic.
+										</p>
+										<a
+											href="#"
+											className="capitalize text-accent-green hover:text-primary transition-colors flex flex-row items-center"
+										>
+											Read more <FaChevronRight className="ml-1" />
+										</a>
+									</div>
+								</div>
 							</div>
 
 							{/* Pagination */}
@@ -127,7 +203,7 @@ export default function Home() {
 										name="search"
 										id="search"
 										placeholder="Enter keywords"
-										className="w-full border-2 border-body-color p-3 focus:outline-none rounded-md"
+										className="w-full border-2 border-in-field-color p-3 focus:outline-none rounded-md"
 									/>
 									<button className="absolute top-[10px] right-2 p-2 bg-accent-green rounded-md text-white hover:bg-primary transition-colors">
 										<FaArrowRight size={14} />
