@@ -33,6 +33,7 @@ const config: Config = {
 			},
 			backgroundImage: {
 				heroBg: "url('/assets/img/bg/hero-bg.png')",
+				footerBg: "url('/assets/img/bg/footer-bg.png')",
 			},
 		},
 	},

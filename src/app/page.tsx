@@ -47,7 +47,7 @@ export default function Home() {
 											<span className="text-title-color font-semibold font-heading">
 												Joe Iskandar
 											</span>
-											<div className="relative after:absolute after:content-[''] after:w-[10px] after:h-[10px] after:top-2 after:left-1 after:bg-disable-color after:rounded-full">
+											<div className="relative after:absolute after:content-[''] after:w-[8px] after:h-[8px] after:top-2 after:left-1 after:bg-disable-color after:rounded-full">
 												<span className="pl-6 text-in-field-color text-[14px]">June 12, 2021</span>
 											</div>
 										</div>
@@ -85,7 +85,7 @@ export default function Home() {
 											<span className="text-title-color font-semibold font-heading">
 												Joe Iskandar
 											</span>
-											<div className="relative after:absolute after:content-[''] after:w-[10px] after:h-[10px] after:top-2 after:left-1 after:bg-disable-color after:rounded-full">
+											<div className="relative after:absolute after:content-[''] after:w-[8px] after:h-[8px] after:top-2 after:left-1 after:bg-disable-color after:rounded-full">
 												<span className="pl-6 text-in-field-color text-[14px]">June 12, 2021</span>
 											</div>
 										</div>
@@ -123,7 +123,7 @@ export default function Home() {
 											<span className="text-title-color font-semibold font-heading">
 												Joe Iskandar
 											</span>
-											<div className="relative after:absolute after:content-[''] after:w-[10px] after:h-[10px] after:top-2 after:left-1 after:bg-disable-color after:rounded-full">
+											<div className="relative after:absolute after:content-[''] after:w-[8px] after:h-[8px] after:top-2 after:left-1 after:bg-disable-color after:rounded-full">
 												<span className="pl-6 text-in-field-color text-[14px]">June 12, 2021</span>
 											</div>
 										</div>
@@ -161,7 +161,7 @@ export default function Home() {
 											<span className="text-title-color font-semibold font-heading">
 												Joe Iskandar
 											</span>
-											<div className="relative after:absolute after:content-[''] after:w-[10px] after:h-[10px] after:top-2 after:left-1 after:bg-disable-color after:rounded-full">
+											<div className="relative after:absolute after:content-[''] after:w-[8px] after:h-[8px] after:top-2 after:left-1 after:bg-disable-color after:rounded-full">
 												<span className="pl-6 text-in-field-color text-[14px]">June 12, 2021</span>
 											</div>
 										</div>
