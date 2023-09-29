@@ -279,11 +279,11 @@ function Post({}: Props) {
 							</div>
 
 							{/* Previous - Next */}
-							<div className="flex flex-row items-stretch gap-x-4">
+							<div className="flex flex-row items-stretch gap-x-4 mb-20">
 								{/* Previous */}
 								<a
 									href="#"
-									className="basis-1/2 my-12 bg-white rounded-lg p-4 shadow-md hover:shadow-primary"
+									className="basis-1/2 bg-white rounded-lg p-4 shadow-md hover:shadow-primary"
 								>
 									<div className="flex flex-col gap-y-5">
 										<div className="flex flex-start">
@@ -304,7 +304,7 @@ function Post({}: Props) {
 								{/* Next */}
 								<a
 									href="#"
-									className="basis-1/2 my-12 bg-white rounded-lg p-4 shadow-md hover:shadow-primary"
+									className="basis-1/2  bg-white rounded-lg p-4 shadow-md hover:shadow-primary"
 								>
 									<div className="flex flex-col gap-y-5">
 										<div className="flex justify-end">

@@ -29,7 +29,7 @@ export default function Home() {
 						<div className="w-9/12">
 							<div className="flex flex-col gap-y-6">
 								{/* Post 1 */}
-								<div className="bg-white p-5 flex flex-row gap-x-9 rounded-lg">
+								<div className="bg-white p-5 flex flex-row gap-x-9 rounded-lg hover:shadow-sm hover:shadow-primary-60 transition-colors duration-500">
 									<div className="basis-1/3 min-w-[296px] min-h-[324px] bg-image-placeholder overflow-hidden rounded-lg">
 										<div className=""></div>
 									</div>
@@ -59,7 +59,7 @@ export default function Home() {
 											excepturi in inventore consequuntur minus? Ut officia exercitationem modi hic.
 										</p>
 										<a
-											href="#"
+											href={`/post/1`}
 											className="capitalize text-accent-green hover:text-primary transition-colors flex flex-row items-center"
 										>
 											Read more <FaChevronRight className="ml-1" />
@@ -67,7 +67,7 @@ export default function Home() {
 									</div>
 								</div>
 								{/* Post 2 */}
-								<div className="bg-white p-5 flex flex-row gap-x-9 rounded-lg">
+								<div className="bg-white p-5 flex flex-row gap-x-9 rounded-lg hover:shadow-sm hover:shadow-primary-60 transition-colors duration-500">
 									<div className="basis-1/3 min-w-[296px] min-h-[324px] bg-image-placeholder overflow-hidden rounded-lg">
 										<div className=""></div>
 									</div>
@@ -97,7 +97,7 @@ export default function Home() {
 											excepturi in inventore consequuntur minus? Ut officia exercitationem modi hic.
 										</p>
 										<a
-											href="#"
+											href={`/post/1`}
 											className="capitalize text-accent-green hover:text-primary transition-colors flex flex-row items-center"
 										>
 											Read more <FaChevronRight className="ml-1" />
@@ -105,7 +105,7 @@ export default function Home() {
 									</div>
 								</div>
 								{/* Post 3 */}
-								<div className="bg-white p-5 flex flex-row gap-x-9 rounded-lg">
+								<div className="bg-white p-5 flex flex-row gap-x-9 rounded-lg hover:shadow-sm hover:shadow-primary-60 transition-colors duration-500">
 									<div className="basis-1/3 min-w-[296px] min-h-[324px] bg-image-placeholder overflow-hidden rounded-lg">
 										<div className=""></div>
 									</div>
@@ -135,7 +135,7 @@ export default function Home() {
 											excepturi in inventore consequuntur minus? Ut officia exercitationem modi hic.
 										</p>
 										<a
-											href="#"
+											href={`/post/1`}
 											className="capitalize text-accent-green hover:text-primary transition-colors flex flex-row items-center"
 										>
 											Read more <FaChevronRight className="ml-1" />
@@ -143,7 +143,7 @@ export default function Home() {
 									</div>
 								</div>
 								{/* Post 4 */}
-								<div className="bg-white p-5 flex flex-row gap-x-9 rounded-lg">
+								<div className="bg-white p-5 flex flex-row gap-x-9 rounded-lg hover:shadow-sm hover:shadow-primary-60 transition-colors duration-500">
 									<div className="basis-1/3 min-w-[296px] min-h-[324px] bg-image-placeholder overflow-hidden rounded-lg">
 										<div className=""></div>
 									</div>
@@ -173,7 +173,7 @@ export default function Home() {
 											excepturi in inventore consequuntur minus? Ut officia exercitationem modi hic.
 										</p>
 										<a
-											href="#"
+											href={`/post/1`}
 											className="capitalize text-accent-green hover:text-primary transition-colors flex flex-row items-center"
 										>
 											Read more <FaChevronRight className="ml-1" />
