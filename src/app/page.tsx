@@ -60,7 +60,7 @@ export default function Home() {
 										</p>
 										<a
 											href={`/post/1`}
-											className="capitalize text-accent-green hover:text-primary transition-colors flex flex-row items-center"
+											className="capitalize text-accent-green hover:text-primary hover:font-bold transition-colors flex flex-row items-center"
 										>
 											Read more <FaChevronRight className="ml-1" />
 										</a>
@@ -98,7 +98,7 @@ export default function Home() {
 										</p>
 										<a
 											href={`/post/1`}
-											className="capitalize text-accent-green hover:text-primary transition-colors flex flex-row items-center"
+											className="capitalize text-accent-green hover:text-primary hover:font-bold transition-colors flex flex-row items-center"
 										>
 											Read more <FaChevronRight className="ml-1" />
 										</a>
@@ -136,7 +136,7 @@ export default function Home() {
 										</p>
 										<a
 											href={`/post/1`}
-											className="capitalize text-accent-green hover:text-primary transition-colors flex flex-row items-center"
+											className="capitalize text-accent-green hover:text-primary hover:font-bold transition-colors flex flex-row items-center"
 										>
 											Read more <FaChevronRight className="ml-1" />
 										</a>
@@ -174,7 +174,7 @@ export default function Home() {
 										</p>
 										<a
 											href={`/post/1`}
-											className="capitalize text-accent-green hover:text-primary transition-colors flex flex-row items-center"
+											className="capitalize text-accent-green hover:text-primary hover:font-bold transition-colors flex flex-row items-center"
 										>
 											Read more <FaChevronRight className="ml-1" />
 										</a>

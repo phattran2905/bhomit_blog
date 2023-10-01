@@ -1,4 +1,4 @@
-import "./globals.css";
+import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Raleway, Roboto } from "next/font/google";
 
@@ -14,8 +14,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-	title: "BhomitBlog",
-	description: "Welcome to BhomitBlog",
+	title: "BhomitBlog - Admin",
+	description: "BhomitBlog Administration",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
