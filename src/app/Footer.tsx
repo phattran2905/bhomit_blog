@@ -1,3 +1,5 @@
+"use client";
+
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 
 type Props = {};

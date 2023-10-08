@@ -1,4 +1,5 @@
-import { useState } from "react";
+"use client";
+
 import { FaChevronDown } from "react-icons/fa";
 
 type Props = {};
