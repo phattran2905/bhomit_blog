@@ -1,11 +1,17 @@
+"use client";
+
+import { ChangeEvent, useState } from "react";
 import { FaLock, FaUserAlt } from "react-icons/fa";
 
 type Props = {};
 function AdminLogin({}: Props) {
+	const [username, setUsername] = useState<string>("");
+	const [password, setPassword] = useState<string>("");
+
 	return (
 		<main className="min-h-screen h-screen w-full  bg-heroBg ">
 			<div className="w-full h-full flex flex-row justify-center items-center backdrop-blur-sm">
-				<div className="basis-1/4 bg-white shadow-xl p-10 rounded-lg">
+				<div className="basis-1/2 xl:basis-1/3 bg-white shadow-xl p-10 rounded-lg">
 					<h1 className="text-title-color text-[48px] mb-8 font-bold text-center uppercase">
 						Login
 					</h1>
@@ -22,11 +28,13 @@ function AdminLogin({}: Props) {
 								Username
 							</label>
 							<input
+								className="focus:outline-none p-3 text-primary border-2 border-primary-80 rounded-lg"
 								type="text"
 								name="username"
 								id="username"
 								placeholder="Enter Username"
-								className="focus:outline-none p-3 text-primary border-2 border-primary-80 rounded-lg"
+								value={username}
+								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
 							/>
 						</div>
 						<div className="p-4 flex flex-col gap-y-2">
@@ -41,11 +49,13 @@ function AdminLogin({}: Props) {
 								Password
 							</label>
 							<input
+								className="focus:outline-none p-3 text-primary border-2 border-primary-80 rounded-lg"
 								type="password"
 								name="password"
 								id="password"
 								placeholder="Enter Password"
-								className="focus:outline-none p-3 text-primary border-2 border-primary-80 rounded-lg"
+								value={password}
+								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
 							/>
 						</div>
 						<div className="px-4 py-6">

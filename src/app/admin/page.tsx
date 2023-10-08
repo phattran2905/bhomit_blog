@@ -1,3 +1,5 @@
+"use client";
+
 import { FaBell, FaChevronRight, FaRainbow } from "react-icons/fa";
 
 type Props = {};
