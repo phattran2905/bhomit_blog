@@ -1,7 +1,7 @@
 "use client";
 
-import Footer from "@/app/Footer";
-import Header from "@/app/Header";
+import Footer from "@/app/(client)/Footer";
+import Header from "@/app/(client)/Header";
 import {
 	FaArrowRight,
 	FaChevronLeft,
