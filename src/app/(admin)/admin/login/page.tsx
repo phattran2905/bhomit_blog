@@ -61,7 +61,14 @@ function AdminLogin({}: Props) {
 						</div>
 						<div className="px-4 py-6">
 							<button
-								onClick={() => signIn("credentials", { redirect: false })}
+								onClick={() =>
+									signIn("credentials", {
+										username,
+										password,
+										callbackUrl: "/admin",
+										// redirect: false,
+									})
+								}
 								className="w-full rounded-lg bg-primary font-bold font-heading text-[18px] text-white px-6 py-3 hover:bg-accent-green transition-colors"
 							>
 								Login
