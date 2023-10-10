@@ -10,7 +10,7 @@ function Footer({}: Props) {
 				<div className="py-20 flex flex-col divide-y-2 divide-solid gap-y-10">
 					<div>
 						<a
-							href=""
+							href="/"
 							className="text-accent-green font-bold text-[48px]"
 						>
 							Bhomit<span className="text-white">Blog.</span>

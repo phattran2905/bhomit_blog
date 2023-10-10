@@ -16,14 +16,13 @@ export default function CreateAccountForm() {
 		setError(null);
 		setSuccess(null);
 
-		if (!username || !email || !password || !confirmPassword) {
+		if (!username || !password || !confirmPassword) {
 			return setError("Please fill in required fields (*)");
 		}
 
 		const emailValidationRegex =
 			/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-		if (email.toLowerCase().match(emailValidationRegex) === null) {
+		if (email && email.toLowerCase().match(emailValidationRegex) === null) {
 			return setError("Email is not valid");
 		}
 
@@ -33,7 +32,9 @@ export default function CreateAccountForm() {
 
 		const formData = new FormData();
 		formData.append("username", username);
-		formData.append("email", email);
+		if (email) {
+			formData.append("email", email);
+		}
 		formData.append("password", password);
 		formData.append("confirm_password", confirmPassword);
 
@@ -82,13 +83,11 @@ export default function CreateAccountForm() {
 					>
 						<FaEnvelope size={14} />
 						Email
-						<span className="text-accent-red">*</span>
 					</label>
 					<input
 						type="email"
 						name="email"
 						id="email"
-						required
 						placeholder="Enter Email"
 						className="px-6 py-3 border border-disable-color rounded-md"
 						value={email}

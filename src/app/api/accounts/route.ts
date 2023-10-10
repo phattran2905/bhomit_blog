@@ -37,11 +37,13 @@ export async function POST(request: NextRequest) {
 			return NextResponse.json({ message: "Passwords do not match" }, { status: 400 });
 		}
 
-		const existingEmail = await prisma.account.findUnique({
-			where: { email: userData.email },
-		});
-		if (existingEmail) {
-			return NextResponse.json({ messagE: "Email is already taken" }, { status: 400 });
+		if (userData.email) {
+			const existingEmail = await prisma.account.findUnique({
+				where: { email: userData.email },
+			});
+			if (existingEmail) {
+				return NextResponse.json({ messagE: "Email is already taken" }, { status: 400 });
+			}
 		}
 
 		const hashedPassword = bcrypt.hashSync(userData.password, bcrypt.genSaltSync());

@@ -9,8 +9,8 @@ generator client {
 
 model Account {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  username       String
-  email          String   @unique
+  username       String   @unique
+  email          String?  @unique
   hashedPassword String
   description    String?
   image          String?

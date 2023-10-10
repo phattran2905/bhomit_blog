@@ -6,13 +6,18 @@ import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import Link from "next/link";
 
 const columns: GridColDef[] = [
-	{ field: "id", headerName: "ID", width: 300 },
+	{ field: "id", headerName: "ID", width: 250 },
 	{ field: "username", headerName: "Username", width: 160 },
-	{ field: "email", headerName: "Email", width: 300 },
+	{ field: "email", headerName: "Email", width: 230 },
 	{
 		field: "createdAt",
 		headerName: "Created At",
-		width: 300,
+		width: 160,
+		valueFormatter(params) {
+			if (params.value) {
+				return new Date(params.value).toDateString();
+			}
+		},
 	},
 	{
 		field: "action",
@@ -22,7 +27,7 @@ const columns: GridColDef[] = [
 		filterable: false,
 		hideable: false,
 		disableColumnMenu: true,
-		width: 300,
+		width: 160,
 		renderCell(params: GridRenderCellParams) {
 			return (
 				<div className="flex flex-row justify-center items-center gap-x-2">

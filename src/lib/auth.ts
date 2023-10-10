@@ -2,6 +2,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { NextAuthOptions } from "next-auth";
 import prisma from "@/lib/prisma";
+import bcrypt from "bcrypt";
 
 export const authOptions: NextAuthOptions = {
 	session: {
@@ -19,25 +20,30 @@ export const authOptions: NextAuthOptions = {
 				password: { label: "Password", type: "password" },
 			},
 			async authorize(credentials, req) {
-				// You need to provide your own logic here that takes the credentials
-				// submitted and returns either a object representing a user or value
-				// that is false/null if the credentials are invalid.
-				// e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-				// You can also use the `req` object to obtain additional parameters
-				// (i.e., the request IP address)
-				console.log(credentials?.username, credentials?.password);
-				// Add logic here to look up the user from the credentials supplied
-				const user = { id: "1", name: "J Smith", email: "jsmith@example.com" };
-
-				if (user) {
-					// Any object returned will be saved in `user` property of the JWT
-					return user;
-				} else {
-					// If you return null then an error will be displayed advising the user to check their details.
-					return null;
-
-					// You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+				if (!credentials?.username || !credentials?.password) {
+					throw new Error("Username or Password is incorrect");
 				}
+
+				const account = await prisma.account.findUnique({
+					where: {
+						username: credentials.username,
+					},
+				});
+
+				if (!account || !account.hashedPassword) {
+					throw new Error("Email does not exist");
+				}
+
+				const isCorrectPassword = await bcrypt.compare(
+					credentials.password,
+					account.hashedPassword
+				);
+
+				if (!isCorrectPassword) {
+					throw new Error("Username or Password is incorrect");
+				}
+
+				return account;
 			},
 		}),
 	],
