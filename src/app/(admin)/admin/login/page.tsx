@@ -6,10 +6,10 @@ import { useSession } from "next-auth/react";
 
 type Props = {};
 function AdminLogin({}: Props) {
-	const { status } = useSession({
+	const { status, data: session } = useSession({
 		required: false,
 	});
-
+	console.log(status, session);
 	if (status === "loading") return "Loading...";
 
 	if (status === "authenticated") return redirect("/admin/dashboard");

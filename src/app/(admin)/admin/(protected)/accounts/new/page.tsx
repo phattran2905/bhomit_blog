@@ -5,11 +5,11 @@ import { getSession } from "next-auth/react";
 
 type Props = {};
 export default async function CreateNewAccount({}: Props) {
-	const session = await getSession();
+	// const session = await getSession();
 
-	if (!session || !session.user) {
-		return redirect("/admin/login");
-	}
+	// if (!session || !session.user) {
+	// 	return redirect("/admin/login");
+	// }
 
 	return (
 		<div>

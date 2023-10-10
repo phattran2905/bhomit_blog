@@ -1,10 +1,7 @@
 import { FaBell } from "react-icons/fa";
-import Sidebar from "../Sidebar";
+import Sidebar from "./Sidebar";
 
-type Props = {
-	children: React.ReactNode;
-};
-export default function Accounts({ children }: Props) {
+export default function layout({ children }: { children: React.ReactNode }) {
 	return (
 		<>
 			<div className="flex flex-row items-stretch min-h-screen bg-image-placeholder">
@@ -23,7 +20,7 @@ export default function Accounts({ children }: Props) {
 						</div>
 					</div>
 					{/* Main content */}
-					<main className="p-6">{children}</main>
+					<main className="p-4 ">{children}</main>
 				</div>
 			</div>
 		</>

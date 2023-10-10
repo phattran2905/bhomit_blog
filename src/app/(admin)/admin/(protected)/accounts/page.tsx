@@ -6,11 +6,11 @@ import DataTable from "./DataTable";
 
 type Props = {};
 async function AccountsPage({}: Props) {
-	const session = await getServerSession();
+	// const session = await getServerSession();
 
-	if (!session || !session.user) {
-		return redirect("/admin/login");
-	}
+	// if (!session || !session.user) {
+	// 	return redirect("/admin/login");
+	// }
 
 	return (
 		<>
