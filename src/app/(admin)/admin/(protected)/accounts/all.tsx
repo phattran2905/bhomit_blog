@@ -38,7 +38,7 @@ const columns: GridColDef[] = [
 						Edit
 					</Link>
 					<Link
-						href={`/admin/accounts/edit/${params.id}`}
+						href={`/admin/accounts?id=${params.id}&action=delete&showModal=true`}
 						className="bg-body-color text-white p-2 hover:bg-primary"
 					>
 						Delete

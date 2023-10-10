@@ -7,7 +7,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
 			<div className="flex flex-row items-stretch min-h-screen bg-image-placeholder">
 				<Sidebar />
 
-				<div className="basis-11/12">
+				<div className="basis-11/12 relative">
 					{/* Header */}
 					<div className="bg-white border-b p-4 border-b-disable-color flex flex-row justify-end items-center">
 						<div className="flex flex-row items-center gap-x-3">

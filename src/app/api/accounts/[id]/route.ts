@@ -118,3 +118,23 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 		return NextResponse.json({ message: error.message }, { status: 500 });
 	}
 }
+
+export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+	try {
+		const accountId = params.id;
+		if (!accountId) {
+			return NextResponse.json({ message: "Not found" }, { status: 404 });
+		}
+
+		const account = await prisma.account.findUnique({ where: { id: accountId } });
+		if (!account) {
+			return NextResponse.json({ message: "Not found" }, { status: 404 });
+		}
+
+		await prisma.account.delete({ where: { id: accountId } });
+
+		return NextResponse.json({ message: "OK" }, { status: 200 });
+	} catch (error: any) {
+		return NextResponse.json({ message: error.message }, { status: 500 });
+	}
+}
