@@ -14,7 +14,6 @@ export default function DataTable({ columns, rows }: { columns: GridColDef[]; ro
 					},
 				}}
 				pageSizeOptions={[5, 10]}
-				checkboxSelection
 			/>
 		</div>
 	);
