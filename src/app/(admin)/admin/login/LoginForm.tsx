@@ -1,5 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaLock, FaUserAlt } from "react-icons/fa";
 
@@ -7,16 +8,25 @@ type Props = {};
 export default function LoginForm({}: Props) {
 	const [username, setUsername] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
+	const [error, setError] = useState<string | null>();
+	const router = useRouter();
 
-	const onLogin = async () => {
+	const onLogIn = async () => {
+		setError(null);
+
 		const response = await signIn("credentials", {
 			username,
 			password,
-			// callbackUrl: "/admin/dashboard",
 			redirect: false,
 		});
 
-		console.log(response);
+		if (response?.error) {
+			return setError("Username or Password is not valid");
+		}
+
+		if (response?.status === 200 && response?.ok) {
+			return router.push("/admin/dashboard");
+		}
 	};
 
 	return (
@@ -63,9 +73,15 @@ export default function LoginForm({}: Props) {
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
 				/>
 			</div>
+
+			{error && (
+				<div className="p-4">
+					<p className="bg-accent-red px-4 py-2 rounded-md text-white">{error}</p>
+				</div>
+			)}
 			<div className="px-4 py-6">
 				<button
-					onClick={onLogin}
+					onClick={onLogIn}
 					className="w-full rounded-lg bg-primary font-bold font-heading text-[18px] text-white px-6 py-3 hover:bg-accent-green transition-colors"
 				>
 					Login

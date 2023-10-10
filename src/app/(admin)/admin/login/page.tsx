@@ -1,18 +1,13 @@
-"use client";
-
 import LoginForm from "./LoginForm";
 import { redirect } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
 
-type Props = {};
-function AdminLogin({}: Props) {
-	const { status, data: session } = useSession({
-		required: false,
-	});
-	console.log(status, session);
-	if (status === "loading") return "Loading...";
+async function AdminLogin() {
+	const session = await getServerSession();
 
-	if (status === "authenticated") return redirect("/admin/dashboard");
+	if (session) {
+		return redirect("/admin/dashboard");
+	}
 
 	return (
 		<>
@@ -20,7 +15,7 @@ function AdminLogin({}: Props) {
 				<div className="w-full h-full flex flex-row justify-center items-center backdrop-blur-sm">
 					<div className="basis-1/2 xl:basis-1/3 bg-white shadow-xl p-10 rounded-lg">
 						<h1 className="text-title-color text-[48px] mb-8 font-bold text-center uppercase">
-							Login
+							admin Login
 						</h1>
 						<LoginForm />
 					</div>

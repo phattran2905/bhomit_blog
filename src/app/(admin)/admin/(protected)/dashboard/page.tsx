@@ -2,8 +2,7 @@ import AuthProvider from "@/components/AuthProvider";
 import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 
-type Props = {};
-function AdminPage({}: Props) {
+export default function DashboardPage() {
 	return (
 		<>
 			<div className="flex flex-row justify-between items-center mb-4">
@@ -13,4 +12,3 @@ function AdminPage({}: Props) {
 		</>
 	);
 }
-export default AdminPage;

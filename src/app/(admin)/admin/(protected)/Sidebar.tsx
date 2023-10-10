@@ -26,9 +26,9 @@ export default function Sidebar({}: Props) {
 					<ul className="flex flex-col">
 						<li>
 							<Link
-								href="/admin"
+								href="/admin/dashboard"
 								className={`flex flex-row gap-x-4 items-center px-8 py-2 ${
-									pathname === "/admin" ? activeStyle : inactiveStyle
+									pathname === "/admin/dashboard" ? activeStyle : inactiveStyle
 								}`}
 							>
 								<FaRainbow size={16} />
