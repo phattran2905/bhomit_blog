@@ -4,8 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaLock, FaUserAlt } from "react-icons/fa";
 
-type Props = {};
-export default function LoginForm({}: Props) {
+export default function LoginForm() {
 	const [username, setUsername] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
 	const [error, setError] = useState<string | null>();

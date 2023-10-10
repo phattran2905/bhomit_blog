@@ -3,14 +3,23 @@
 import { ChangeEvent, useState } from "react";
 import { FaEnvelope, FaLock, FaUserAlt } from "react-icons/fa";
 import axios from "axios";
+import { usePathname } from "next/navigation";
 
-export default function CreateAccountForm() {
-	const [username, setUsername] = useState<string>("");
-	const [email, setEmail] = useState<string>("");
+type Props = {
+	_username?: string;
+	_email?: string;
+	submitLabel: string;
+	formType: string;
+};
+
+export default function AccountForm({ _username, _email, submitLabel, formType }: Props) {
+	const [username, setUsername] = useState<string>(_username || "");
+	const [email, setEmail] = useState<string>(_email || "");
 	const [password, setPassword] = useState<string>("");
 	const [confirmPassword, setConfirmPassword] = useState<string>("");
 	const [error, setError] = useState<string | null>(null);
 	const [success, setSuccess] = useState<string | null>(null);
+	const pathname = usePathname();
 
 	const onCreateNewAccount = async () => {
 		setError(null);
@@ -46,7 +55,65 @@ export default function CreateAccountForm() {
 		});
 
 		if (response?.data) {
+			setError(null);
 			return setSuccess("Successfully created");
+		} else {
+			setSuccess(null);
+			return setError("Failed to create");
+		}
+	};
+
+	const onUpdateAccount = async () => {
+		setError(null);
+		setSuccess(null);
+
+		const formData = new FormData();
+
+		if (!username) {
+			return setError("Please fill in required fields (*)");
+		}
+		if (username !== _username) {
+			formData.append("username", username);
+		}
+
+		if (email !== _email) {
+			const emailValidationRegex =
+				/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			if (email.toLowerCase().match(emailValidationRegex) === null) {
+				return setError("Email is not valid");
+			}
+			formData.append("email", email);
+		}
+
+		if (password && confirmPassword) {
+			if (password !== confirmPassword) {
+				return setError("Password does not match");
+			} else {
+				formData.append("password", password);
+				formData.append("confirm_password", confirmPassword);
+			}
+		}
+		// Check if values are edited
+		if (
+			formData.get("username") ||
+			formData.get("email") ||
+			formData.get("password") ||
+			formData.get("confirm_password")
+		) {
+			const response = await axios({
+				method: "POST",
+				url: `/api/accounts/${pathname.split("/admin/accounts/edit/")[1]}`,
+				headers: { "Content-Type": "application/json" },
+				data: formData,
+			});
+
+			if (response?.data) {
+				setError(null);
+				return setSuccess("Successfully updated");
+			} else {
+				setSuccess(null);
+				return setError("Failed to create");
+			}
 		}
 	};
 
@@ -103,7 +170,7 @@ export default function CreateAccountForm() {
 					>
 						<FaLock size={14} />
 						Password
-						<span className="text-accent-red">*</span>
+						{formType === "create" && <span className="text-accent-red">*</span>}
 					</label>
 					<input
 						type="password"
@@ -125,7 +192,7 @@ export default function CreateAccountForm() {
 					>
 						<FaLock size={14} />
 						Confirm Password
-						<span className="text-accent-red">*</span>
+						{formType === "create" && <span className="text-accent-red">*</span>}
 					</label>
 					<input
 						type="password"
@@ -156,10 +223,10 @@ export default function CreateAccountForm() {
 
 			<div className="mt-10 flex flex-row justify-center">
 				<button
-					onClick={onCreateNewAccount}
-					className="w-1/2 px-4 py-2 rounded-md font-medium text-[18px] bg-primary text-white hover:bg-accent-red transition-colors"
+					onClick={formType === "create" ? onCreateNewAccount : onUpdateAccount}
+					className="w-1/2 px-4 py-2 rounded-md font-medium text-[18px] bg-primary text-white hover:bg-orange transition-colors capitalize"
 				>
-					Create
+					{submitLabel}
 				</button>
 			</div>
 		</div>

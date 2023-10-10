@@ -1,7 +1,7 @@
 "use client";
 
 import DataTable from "@/components/DataTable";
-import useAccounts from "@/hooks/useAccount";
+import { useAccounts } from "@/hooks/useAccount";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import Link from "next/link";
 
@@ -33,13 +33,13 @@ const columns: GridColDef[] = [
 				<div className="flex flex-row justify-center items-center gap-x-2">
 					<Link
 						href={`/admin/accounts/edit/${params.id}`}
-						className="bg-orange text-white p-2"
+						className="bg-orange text-white p-2 hover:bg-primary"
 					>
 						Edit
 					</Link>
 					<Link
 						href={`/admin/accounts/edit/${params.id}`}
-						className="bg-body-color text-white p-2"
+						className="bg-body-color text-white p-2 hover:bg-primary"
 					>
 						Delete
 					</Link>

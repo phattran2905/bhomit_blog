@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 import { zfd } from "zod-form-data";
 import bcrypt from "bcrypt";
+import zod from "zod";
 
 export async function GET() {
 	try {
@@ -26,7 +27,7 @@ export async function POST(request: NextRequest) {
 	try {
 		const schema = zfd.formData({
 			username: zfd.text(),
-			email: zfd.text(),
+			email: zfd.text(zod.string().optional()),
 			password: zfd.text(),
 			confirm_password: zfd.text(),
 		});
