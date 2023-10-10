@@ -98,9 +98,6 @@ export default function Sidebar({}: Props) {
 								<span className="text-[18px] font-heading capitalize">Dashboard</span>
 							</a>
 						</li>
-						<li>
-							<button onClick={() => signOut({ callbackUrl: "/admin/login" })}>Log out</button>
-						</li>
 					</ul>
 				</div>
 			</div>
