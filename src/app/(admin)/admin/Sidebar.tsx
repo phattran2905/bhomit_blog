@@ -2,9 +2,15 @@
 
 import { FaChevronRight, FaRainbow } from "react-icons/fa";
 import { signOut } from "next-auth/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type Props = {};
 export default function Sidebar({}: Props) {
+	const activeStyle = "text-white bg-dim-black";
+	const inactiveStyle = "text-in-field-color hover:bg-dim-black";
+	const pathname = usePathname();
+
 	return (
 		<>
 			<div className="basis-1/12 bg-sidebar-color">
@@ -19,43 +25,49 @@ export default function Sidebar({}: Props) {
 				<div className="py-2">
 					<ul className="flex flex-col">
 						<li>
-							<a
-								href="#"
-								className="flex flex-row gap-x-4 items-center text-in-field-color px-8 py-2 hover:bg-dim-black"
+							<Link
+								href="/admin/dashboard"
+								className={`flex flex-row gap-x-4 items-center px-8 py-2 ${
+									pathname === "/admin/dashboard" ? activeStyle : inactiveStyle
+								}`}
 							>
 								<FaRainbow size={16} />
 								<span className="text-[18px] font-heading capitalize">Dashboard</span>
-							</a>
+							</Link>
 						</li>
 						<li>
-							<a
-								href="#"
-								className="flex flex-row items-center gap-x-4 text-in-field-color px-8 py-2 hover:bg-dim-black"
+							<Link
+								href="/admin/accounts"
+								className={`flex flex-row gap-x-4 items-center px-8 py-2 ${
+									pathname.includes("/admin/accounts") ? activeStyle : inactiveStyle
+								}`}
 							>
 								<FaRainbow size={16} />
-								<span className="text-[18px] font-heading capitalize">Menu</span>
+								<span className="text-[18px] font-heading capitalize">Account</span>
 								<FaChevronRight
 									size={10}
 									className="ml-auto"
 								/>
-							</a>
+							</Link>
 
-							<ul>
-								<li className=" hover:bg-dim-black">
-									<a
-										href="#"
-										className="w-full ml-8 text-[18px] font-heading inline-block text-in-field-color px-8 py-2"
+							<ul className={`${pathname.includes("/admin/accounts") ? "block" : "hidden"}`}>
+								<li className={`${pathname === "/admin/accounts" ? activeStyle : inactiveStyle}`}>
+									<Link
+										href="/admin/accounts"
+										className="w-full ml-8 text-[18px] font-heading inline-block px-8 py-1"
 									>
-										Menu1
-									</a>
+										All Accounts
+									</Link>
 								</li>
-								<li className=" hover:bg-dim-black">
-									<a
-										href="#"
-										className="w-full ml-8 text-[18px] font-heading inline-block text-in-field-color px-8 py-2"
+								<li
+									className={`${pathname === "/admin/accounts/new" ? activeStyle : inactiveStyle}`}
+								>
+									<Link
+										href="/admin/accounts/new"
+										className="w-full ml-8 text-[18px] font-heading inline-block px-8 py-1"
 									>
-										Menu1
-									</a>
+										New Account
+									</Link>
 								</li>
 							</ul>
 						</li>

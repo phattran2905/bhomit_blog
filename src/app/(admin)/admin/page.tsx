@@ -1,13 +1,11 @@
-import AuthProvider from "@/components/AuthProvider";
 import Dashboard from "./dashboard/page";
+import AuthProvider from "@/components/AuthProvider";
 
 type Props = {};
 function AdminPage({}: Props) {
 	return (
 		<AuthProvider>
-			<div className="flex flex-row items-stretch min-h-screen">
-				<Dashboard />
-			</div>
+			<Dashboard />
 		</AuthProvider>
 	);
 }

@@ -1,4 +1,5 @@
 import "@/app/globals.css";
+import AuthProvider from "@/components/AuthProvider";
 import type { Metadata } from "next";
 import { Raleway, Roboto } from "next/font/google";
 
@@ -14,15 +15,19 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-	title: "BhomitBlog - Admin",
-	description: "BhomitBlog Administration",
+	title: "BhomitBlog - Login",
+	description: "BhomitBlog Administration Login",
 };
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+type Props = {
+	children: React.ReactNode;
+};
+
+export default function DashboardLayout({ children }: Props) {
 	return (
 		<html lang="en">
 			<body className={`${raleway.className} ${roboto.className}`}>
-				<>{children}</>
+				<AuthProvider>{children}</AuthProvider>
 			</body>
 		</html>
 	);
