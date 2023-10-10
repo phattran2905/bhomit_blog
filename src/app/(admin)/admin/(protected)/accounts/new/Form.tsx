@@ -4,14 +4,13 @@ import { ChangeEvent, useState } from "react";
 import { FaEnvelope, FaLock, FaUserAlt } from "react-icons/fa";
 import axios from "axios";
 
-type Props = {};
-export default function CreateAccountForm({}: Props) {
-	const [username, setUsername] = useState<string>();
-	const [email, setEmail] = useState<string>();
-	const [password, setPassword] = useState<string>();
-	const [confirmPassword, setConfirmPassword] = useState<string>();
-	const [error, setError] = useState<string | null>();
-	const [success, setSuccess] = useState<string | null>();
+export default function CreateAccountForm() {
+	const [username, setUsername] = useState<string>("");
+	const [email, setEmail] = useState<string>("");
+	const [password, setPassword] = useState<string>("");
+	const [confirmPassword, setConfirmPassword] = useState<string>("");
+	const [error, setError] = useState<string | null>(null);
+	const [success, setSuccess] = useState<string | null>(null);
 
 	const onCreateNewAccount = async () => {
 		setError(null);
@@ -44,7 +43,7 @@ export default function CreateAccountForm({}: Props) {
 			headers: { "Content-Type": "application/json" },
 			data: formData,
 		});
-		console.log(response?.data);
+
 		if (response?.data) {
 			return setSuccess("Successfully created");
 		}

@@ -20,7 +20,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
 						</div>
 					</div>
 					{/* Main content */}
-					<main className="p-4 ">{children}</main>
+					<main className="p-8">{children}</main>
 				</div>
 			</div>
 		</>

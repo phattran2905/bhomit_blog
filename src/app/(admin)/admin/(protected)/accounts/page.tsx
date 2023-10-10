@@ -2,15 +2,14 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
-import DataTable from "./DataTable";
+import AllAccounts from "./all";
 
-type Props = {};
-async function AccountsPage({}: Props) {
-	// const session = await getServerSession();
+async function AccountsPage() {
+	const session = await getServerSession();
 
-	// if (!session || !session.user) {
-	// 	return redirect("/admin/login");
-	// }
+	if (!session || !session.user) {
+		return redirect("/admin/login");
+	}
 
 	return (
 		<>
@@ -26,8 +25,8 @@ async function AccountsPage({}: Props) {
 					New Account
 				</Link>
 			</div>
-			<div className="my-6">
-				<DataTable />
+			<div className="my-6 bg-white">
+				<AllAccounts />
 			</div>
 		</>
 	);

@@ -1,8 +1,13 @@
-import AuthProvider from "@/components/AuthProvider";
-import Link from "next/link";
-import { FaPlus } from "react-icons/fa";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+	const session = await getServerSession();
+
+	if (!session || !session.user) {
+		return redirect("/admin/login");
+	}
+
 	return (
 		<>
 			<div className="flex flex-row justify-between items-center mb-4">
