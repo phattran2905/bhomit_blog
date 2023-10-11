@@ -1,10 +1,11 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import { FaCode, FaImage } from "react-icons/fa";
-import { FaTarp } from "react-icons/fa6";
+import { FaCode, FaImage, FaTimes } from "react-icons/fa";
+import { FaTableList, FaTarp } from "react-icons/fa6";
 import axios from "axios";
 import { usePathname } from "next/navigation";
+import { useCategories } from "@/hooks/useCategory";
 
 type Props = {
 	_title?: string;
@@ -17,6 +18,10 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 	const [error, setError] = useState<string | null>(null);
 	const [success, setSuccess] = useState<string | null>(null);
 	const pathname = usePathname();
+	const { data: categories } = useCategories();
+	const [selectedCatID, setSelectedCatID] = useState<string>("");
+	const [tags, setTags] = useState<string[]>(["T1", "T2", "T3"]);
+	const [tagInput, setTagInput] = useState<string>("");
 
 	const onCreateNewTag = async () => {
 		setError(null);
@@ -99,7 +104,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 					</label>
 					<input
 						type="text"
-						title="title"
+						name="title"
 						id="title"
 						required
 						placeholder="Enter Title"
@@ -112,7 +117,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 				{/* Body */}
 				<div className="flex flex-col gap-y-3">
 					<label
-						htmlFor="title"
+						htmlFor="body"
 						className="font-medium flex flex-row items-center gap-x-2"
 					>
 						<FaTarp size={14} />
@@ -120,10 +125,10 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 						<span className="text-accent-red">*</span>
 					</label>
 					<textarea
-						title="title"
-						id="title"
+						name="body"
+						id="body"
 						required
-						placeholder="Enter Title"
+						placeholder="Enter Body"
 						className="px-6 py-3 border border-disable-color rounded-md"
 						onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setTitle(e.target.value)}
 					></textarea>
@@ -151,20 +156,26 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 						htmlFor="title"
 						className="font-medium flex flex-row items-center gap-x-2"
 					>
-						<FaTarp size={14} />
+						<FaTableList size={14} />
 						Category
 						<span className="text-accent-red">*</span>
 					</label>
-					<input
-						type="text"
-						title="title"
-						id="title"
-						required
-						placeholder="Enter Title"
+					<select
+						name="category"
+						id="category"
 						className="px-6 py-3 border border-disable-color rounded-md"
-						value={title}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-					/>
+					>
+						{categories &&
+							categories.map((category: any) => (
+								<option
+									value={category.id}
+									selected={category.id === selectedCatID ? true : false}
+									onSelect={() => setSelectedCatID(category.id)}
+								>
+									{category.name}
+								</option>
+							))}
+					</select>
 				</div>
 				{/* Tag */}
 				<div className="flex flex-col gap-y-3">
@@ -174,23 +185,53 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 					>
 						<FaTarp size={14} />
 						Tag
-						<span className="text-accent-red">*</span>
 					</label>
-					<input
-						type="text"
-						title="title"
-						id="title"
-						required
-						placeholder="Enter Title"
-						className="px-6 py-3 border border-disable-color rounded-md"
-						value={title}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-					/>
+					<div className="flex flex-row justify-between items-stretch">
+						<input
+							type="text"
+							name="tag"
+							id="tag"
+							required
+							placeholder="Enter Title"
+							className="w-full px-6 py-3 border border-disable-color rounded-md"
+							value={tagInput}
+							onChange={(e: ChangeEvent<HTMLInputElement>) => setTagInput(e.target.value)}
+						/>
+						<button
+							onClick={() => {
+								setTagInput("");
+								setTags([...tags, tagInput]);
+							}}
+							className="bg-primary py-2 px-4 font-medium text-white hover:bg-accent-green"
+						>
+							Add
+						</button>
+					</div>
+					{/* Added tags */}
+					{tags.length > 0 && (
+						<div className="flex flex-row flex-wrap gap-2 py-2">
+							{tags.map((tag: string, index: number) => (
+								<div className="flex flex-row items-stretch">
+									<span className="text-[14px] bg-disable-color px-4 py-1">{tag}</span>
+									<button
+										onClick={() => {
+											const updatedTags = [...tags];
+											updatedTags.splice(index, 1);
+											setTags(updatedTags);
+										}}
+										className="p-2 bg-in-field-color text-white hover:bg-black"
+									>
+										<FaTimes size={14} />
+									</button>
+								</div>
+							))}
+						</div>
+					)}
 				</div>
 				{/* Feature Image */}
 				<div className="flex flex-col gap-y-3">
 					<label
-						htmlFor="title"
+						htmlFor="feature-img"
 						className="font-medium flex flex-row items-center gap-x-2"
 					>
 						<FaImage size={14} />
@@ -198,11 +239,9 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 					</label>
 					<input
 						type="file"
-						title="title"
-						id="title"
+						name="feature-img"
+						id="feature-img"
 						className="px-6 py-3 border border-disable-color rounded-md"
-						value={title}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
 					/>
 				</div>
 				<div className="border-y py-2">
