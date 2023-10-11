@@ -5,28 +5,26 @@ import zod from "zod";
 
 export async function GET(request: NextRequest, { params }: { params: { id: string } }) {
 	try {
-		const categoryId = params.id;
+		const tagId = params.id;
 
-		if (!categoryId) {
+		if (!tagId) {
 			return NextResponse.json({ message: "Not found" }, { status: 404 });
 		}
 
-		const category = await prisma.category.findUnique({
-			where: { id: categoryId },
+		const tag = await prisma.tag.findUnique({
+			where: { id: tagId },
 			select: {
 				id: true,
 				name: true,
-				slug: true,
-				image: true,
 				createdAt: true,
 				updatedAt: true,
 			},
 		});
-		if (!category) {
+		if (!tag) {
 			return NextResponse.json({ message: "Not found" }, { status: 404 });
 		}
 
-		return NextResponse.json(category, { status: 200 });
+		return NextResponse.json(tag, { status: 200 });
 	} catch (error: any) {
 		return NextResponse.json({ message: error.message }, { status: 500 });
 	}
@@ -34,72 +32,52 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
 
 export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
 	try {
-		const categoryId = params.id;
+		const tagId = params.id;
 
-		if (!categoryId) {
+		if (!tagId) {
 			return NextResponse.json({ message: "Not found" }, { status: 404 });
 		}
 
-		const category = await prisma.category.findUnique({
-			where: { id: categoryId },
+		const tag = await prisma.tag.findUnique({
+			where: { id: tagId },
 		});
 
-		if (!category) {
+		if (!tag) {
 			return NextResponse.json({ message: "Not found" }, { status: 404 });
 		}
 
 		const schema = zfd.formData({
 			name: zfd.text(),
-			slug: zfd.text(),
-			image: zfd.text(zod.string().optional()),
 		});
 		const formData = await request.json();
-		const categoryData = schema.parse(formData);
+		const tagData = schema.parse(formData);
 
-		const existingName = await prisma.category.findUnique({
+		const existingName = await prisma.tag.findUnique({
 			where: {
 				NOT: {
-					id: categoryId,
+					id: tagId,
 				},
-				name: categoryData.name,
+				name: tagData.name,
 			},
 		});
 		if (existingName) {
 			return NextResponse.json({ message: "Name is already taken" }, { status: 400 });
 		}
 
-		if (categoryData.slug) {
-			const existingSlug = await prisma.category.findUnique({
-				where: {
-					NOT: {
-						id: categoryId,
-					},
-					slug: categoryData.slug,
-				},
-			});
-			if (existingSlug) {
-				return NextResponse.json({ message: "Email is already taken" }, { status: 400 });
-			}
-		}
-
-		const updatedCategory = await prisma.category.update({
-			where: { id: categoryId },
+		const updatedTag = await prisma.tag.update({
+			where: { id: tagId },
 			data: {
-				name: categoryData.name,
-				slug: categoryData.slug,
-				image: categoryData.image ? categoryData.image : null,
+				name: tagData.name,
 			},
 			select: {
 				id: true,
 				name: true,
-				slug: true,
-				image: true,
 				createdAt: true,
 				updatedAt: true,
 			},
 		});
 
-		return NextResponse.json(updatedCategory, { status: 200 });
+		return NextResponse.json(updatedTag, { status: 200 });
 	} catch (error: any) {
 		return NextResponse.json({ message: error.message }, { status: 500 });
 	}
@@ -107,17 +85,17 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 
 export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
 	try {
-		const categoryId = params.id;
-		if (!categoryId) {
+		const tagId = params.id;
+		if (!tagId) {
 			return NextResponse.json({ message: "Not found" }, { status: 404 });
 		}
 
-		const category = await prisma.category.findUnique({ where: { id: categoryId } });
-		if (!category) {
+		const tag = await prisma.tag.findUnique({ where: { id: tagId } });
+		if (!tag) {
 			return NextResponse.json({ message: "Not found" }, { status: 404 });
 		}
 
-		await prisma.category.delete({ where: { id: categoryId } });
+		await prisma.tag.delete({ where: { id: tagId } });
 
 		return NextResponse.json({ message: "OK" }, { status: 200 });
 	} catch (error: any) {

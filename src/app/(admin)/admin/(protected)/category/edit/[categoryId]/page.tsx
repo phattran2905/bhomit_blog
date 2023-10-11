@@ -8,7 +8,7 @@ export default function EditCategory({}: Props) {
 	const pathname = usePathname();
 
 	const { data: category, isLoading } = useCategoryById(pathname.split("/admin/category/edit/")[1]);
-	console.log(category);
+
 	if (isLoading) return "Loading...";
 
 	return (

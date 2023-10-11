@@ -2,12 +2,12 @@
 
 import { FaPlus, FaTimes } from "react-icons/fa";
 import Link from "next/link";
-import AllCategories from "./all";
+import AllTags from "./all";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-function CategoryPage() {
+function TagPage() {
 	const pathname = usePathname();
 	const router = useRouter();
 	const searchParams = useSearchParams();
@@ -30,12 +30,12 @@ function CategoryPage() {
 		if (action === "delete") {
 			const response = await axios({
 				method: "DELETE",
-				url: `/api/category/${id}`,
+				url: `/api/tag/${id}`,
 				headers: { "Content-Type": "application/json" },
 			});
 
 			if (response?.data) {
-				return router.push("/admin/category");
+				return router.push("/admin/tag");
 			}
 		}
 	};
@@ -43,19 +43,19 @@ function CategoryPage() {
 	return (
 		<>
 			<div className="flex flex-row justify-between items-center mb-4">
-				<h1 className="font-heading text-[28px] font-bold capitalize">All Categories</h1>
+				<h1 className="font-heading text-[28px] font-bold capitalize">All Tags</h1>
 				<Link
-					href="/admin/category/new"
+					href="/admin/tag/new"
 					className="flex flex-row items-center gap-x-2 bg-accent-green font-medium text-[14px] text-white px-4 py-2 rounded-lg hover:bg-primary transition-colors"
 				>
 					<span>
 						<FaPlus />
 					</span>
-					New Category
+					New Tag
 				</Link>
 			</div>
 			<div className="my-6 bg-white">
-				<AllCategories />
+				<AllTags />
 			</div>
 			{/* Modal */}
 			<div
@@ -98,4 +98,4 @@ function CategoryPage() {
 		</>
 	);
 }
-export default CategoryPage;
+export default TagPage;

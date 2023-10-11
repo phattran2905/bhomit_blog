@@ -1,6 +1,12 @@
 "use client";
 
-import { FaBuromobelexperte, FaChevronRight, FaRainbow, FaUserFriends } from "react-icons/fa";
+import {
+	FaBuromobelexperte,
+	FaChevronRight,
+	FaRainbow,
+	FaTags,
+	FaUserFriends,
+} from "react-icons/fa";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,6 +30,7 @@ export default function Sidebar({}: Props) {
 				</div>
 				<div className="py-2">
 					<ul className="flex flex-col">
+						{/* Dashboard */}
 						<li>
 							<Link
 								href="/admin/dashboard"
@@ -35,6 +42,8 @@ export default function Sidebar({}: Props) {
 								<span className="text-[18px] font-heading capitalize">Dashboard</span>
 							</Link>
 						</li>
+
+						{/* Category */}
 						<li>
 							<Link
 								href="/admin/category"
@@ -71,6 +80,46 @@ export default function Sidebar({}: Props) {
 								</li>
 							</ul>
 						</li>
+
+						{/* Tag */}
+						<li>
+							<Link
+								href="/admin/tag"
+								className={`flex flex-row gap-x-4 items-center px-8 py-2 ${
+									pathname.includes("/admin/tag") ? activeStyle : inactiveStyle
+								}`}
+							>
+								<FaTags size={16} />
+								<span className="text-[18px] font-heading capitalize">Tag</span>
+								<FaChevronRight
+									size={10}
+									className="ml-auto"
+								/>
+							</Link>
+
+							<ul className={`${pathname.includes("/admin/tag") ? "block" : "hidden"}`}>
+								<li className={`${pathname === "/admin/tag" ? activeStyle : inactiveStyle}`}>
+									<Link
+										href="/admin/tag"
+										className="w-full ml-8 text-[18px] font-heading inline-block px-8 py-1"
+									>
+										All Tags
+									</Link>
+								</li>
+								<li className={`${pathname === "/admin/tag/new" ? activeStyle : inactiveStyle}`}>
+									<Link
+										href="/admin/tag/new"
+										className="w-full ml-8 text-[18px] font-heading inline-block px-8 py-1"
+									>
+										New Tag
+									</Link>
+								</li>
+							</ul>
+						</li>
+
+						{/* Post */}
+
+						{/* Account */}
 						<li>
 							<Link
 								href="/admin/accounts"
@@ -106,15 +155,6 @@ export default function Sidebar({}: Props) {
 									</Link>
 								</li>
 							</ul>
-						</li>
-						<li>
-							<a
-								href="#"
-								className="flex flex-row gap-x-4 items-center text-in-field-color px-8 py-2 hover:bg-dim-black"
-							>
-								<FaRainbow size={16} />
-								<span className="text-[18px] font-heading capitalize">Dashboard</span>
-							</a>
 						</li>
 					</ul>
 				</div>
