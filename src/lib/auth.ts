@@ -46,7 +46,14 @@ export const authOptions: NextAuthOptions = {
 					throw new Error("Username or Password is incorrect");
 				}
 
-				return account;
+				return {
+					id: account.id,
+					username: account.username,
+					email: account.email,
+					description: account.description,
+					image: account.image,
+					createdAt: account.createdAt,
+				};
 			},
 		}),
 	],

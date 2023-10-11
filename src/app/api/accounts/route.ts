@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 				where: { email: userData.email },
 			});
 			if (existingEmail) {
-				return NextResponse.json({ messagE: "Email is already taken" }, { status: 400 });
+				return NextResponse.json({ message: "Email is already taken" }, { status: 400 });
 			}
 		}
 

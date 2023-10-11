@@ -1,6 +1,6 @@
 "use client";
 
-import { FaChevronRight, FaRainbow } from "react-icons/fa";
+import { FaBuromobelexperte, FaChevronRight, FaRainbow, FaUserFriends } from "react-icons/fa";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -37,12 +37,48 @@ export default function Sidebar({}: Props) {
 						</li>
 						<li>
 							<Link
+								href="/admin/category"
+								className={`flex flex-row gap-x-4 items-center px-8 py-2 ${
+									pathname.includes("/admin/category") ? activeStyle : inactiveStyle
+								}`}
+							>
+								<FaBuromobelexperte size={16} />
+								<span className="text-[18px] font-heading capitalize">Category</span>
+								<FaChevronRight
+									size={10}
+									className="ml-auto"
+								/>
+							</Link>
+
+							<ul className={`${pathname.includes("/admin/category") ? "block" : "hidden"}`}>
+								<li className={`${pathname === "/admin/category" ? activeStyle : inactiveStyle}`}>
+									<Link
+										href="/admin/category"
+										className="w-full ml-8 text-[18px] font-heading inline-block px-8 py-1"
+									>
+										All Categories
+									</Link>
+								</li>
+								<li
+									className={`${pathname === "/admin/category/new" ? activeStyle : inactiveStyle}`}
+								>
+									<Link
+										href="/admin/category/new"
+										className="w-full ml-8 text-[18px] font-heading inline-block px-8 py-1"
+									>
+										New Account
+									</Link>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<Link
 								href="/admin/accounts"
 								className={`flex flex-row gap-x-4 items-center px-8 py-2 ${
 									pathname.includes("/admin/accounts") ? activeStyle : inactiveStyle
 								}`}
 							>
-								<FaRainbow size={16} />
+								<FaUserFriends size={16} />
 								<span className="text-[18px] font-heading capitalize">Account</span>
 								<FaChevronRight
 									size={10}
@@ -70,24 +106,6 @@ export default function Sidebar({}: Props) {
 									</Link>
 								</li>
 							</ul>
-						</li>
-						<li>
-							<a
-								href="#"
-								className="flex flex-row gap-x-4 items-center text-in-field-color px-8 py-2 hover:bg-dim-black"
-							>
-								<FaRainbow size={16} />
-								<span className="text-[18px] font-heading capitalize">Dashboard</span>
-							</a>
-						</li>
-						<li>
-							<a
-								href="#"
-								className="flex flex-row gap-x-4 items-center text-in-field-color px-8 py-2 hover:bg-dim-black"
-							>
-								<FaRainbow size={16} />
-								<span className="text-[18px] font-heading capitalize">Dashboard</span>
-							</a>
 						</li>
 						<li>
 							<a
