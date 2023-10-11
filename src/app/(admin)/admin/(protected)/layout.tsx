@@ -11,7 +11,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
 					{/* Header */}
 					<Header />
 					{/* Main content */}
-					<main className="p-8 w-full h-full">{children}</main>
+					<main className="p-8 w-full">{children}</main>
 				</div>
 			</div>
 		</>

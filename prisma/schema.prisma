@@ -26,6 +26,7 @@ model Category {
   image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Post      Post[]
 }
 
 model Tag {
@@ -42,10 +43,12 @@ model Post {
   title        String
   accountId    String   @db.ObjectId
   categoryId   String   @db.ObjectId
-  tagList      Tag[]
+  tagList      String[] @default([])
   thumbnailImg String?
   content      String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   account      Account  @relation(fields: [accountId], references: [id])
+  category     Category @relation(fields: [categoryId], references: [id])
+  tags         Tag[]
 }

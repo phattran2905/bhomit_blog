@@ -5,9 +5,9 @@ import zod from "zod";
 
 export async function GET() {
 	try {
-		const categories = await prisma.tag.findMany();
+		const tags = await prisma.tag.findMany();
 
-		return NextResponse.json(categories, { status: 200 });
+		return NextResponse.json(tags, { status: 200 });
 	} catch (error: any) {
 		return NextResponse.json({ message: error?.message }, { status: 500 });
 	}

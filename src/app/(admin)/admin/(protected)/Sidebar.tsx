@@ -1,18 +1,11 @@
 "use client";
 
-import {
-	FaBuromobelexperte,
-	FaChevronRight,
-	FaRainbow,
-	FaTags,
-	FaUserFriends,
-} from "react-icons/fa";
-import { signOut } from "next-auth/react";
+import { FaChevronRight, FaNewspaper, FaRainbow, FaTags, FaUserFriends } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FaTableList } from "react-icons/fa6";
 
-type Props = {};
-export default function Sidebar({}: Props) {
+export default function Sidebar() {
 	const activeStyle = "text-white bg-dim-black";
 	const inactiveStyle = "text-in-field-color hover:bg-dim-black";
 	const pathname = usePathname();
@@ -51,7 +44,7 @@ export default function Sidebar({}: Props) {
 									pathname.includes("/admin/category") ? activeStyle : inactiveStyle
 								}`}
 							>
-								<FaBuromobelexperte size={16} />
+								<FaTableList size={16} />
 								<span className="text-[18px] font-heading capitalize">Category</span>
 								<FaChevronRight
 									size={10}
@@ -118,6 +111,40 @@ export default function Sidebar({}: Props) {
 						</li>
 
 						{/* Post */}
+						<li>
+							<Link
+								href="/admin/post"
+								className={`flex flex-row gap-x-4 items-center px-8 py-2 ${
+									pathname.includes("/admin/post") ? activeStyle : inactiveStyle
+								}`}
+							>
+								<FaNewspaper size={16} />
+								<span className="text-[18px] font-heading capitalize">Post</span>
+								<FaChevronRight
+									size={10}
+									className="ml-auto"
+								/>
+							</Link>
+
+							<ul className={`${pathname.includes("/admin/post") ? "block" : "hidden"}`}>
+								<li className={`${pathname === "/admin/post" ? activeStyle : inactiveStyle}`}>
+									<Link
+										href="/admin/post"
+										className="w-full ml-8 text-[18px] font-heading inline-block px-8 py-1"
+									>
+										All Posts
+									</Link>
+								</li>
+								<li className={`${pathname === "/admin/post/new" ? activeStyle : inactiveStyle}`}>
+									<Link
+										href="/admin/post/new"
+										className="w-full ml-8 text-[18px] font-heading inline-block px-8 py-1"
+									>
+										New Post
+									</Link>
+								</li>
+							</ul>
+						</li>
 
 						{/* Account */}
 						<li>
