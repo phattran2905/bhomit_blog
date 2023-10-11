@@ -14,7 +14,7 @@ export default function EditAccount({}: Props) {
 	return (
 		<div>
 			<div className="mb-6">
-				<h1 className="font-heading text-[28px] font-bold capitalize">Create new account</h1>
+				<h1 className="font-heading text-[28px] font-bold capitalize">Edit account</h1>
 			</div>
 
 			<EditAccountForm

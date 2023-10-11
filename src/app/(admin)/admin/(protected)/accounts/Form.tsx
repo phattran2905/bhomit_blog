@@ -47,19 +47,26 @@ export default function AccountForm({ _username, _email, submitLabel, formType }
 		formData.append("password", password);
 		formData.append("confirm_password", confirmPassword);
 
-		const response = await axios({
-			method: "POST",
-			url: "/api/accounts/",
-			headers: { "Content-Type": "application/json" },
-			data: formData,
-		});
+		try {
+			const response = await axios({
+				method: "POST",
+				url: "/api/accounts/",
+				headers: { "Content-Type": "application/json" },
+				data: formData,
+			});
 
-		if (response?.data) {
-			setError(null);
-			return setSuccess("Successfully created");
-		} else {
-			setSuccess(null);
-			return setError("Failed to create");
+			if (response?.data) {
+				setError(null);
+				return setSuccess("Successfully created");
+			} else {
+				setSuccess(null);
+				return setError("Failed to create");
+			}
+		} catch (error: any) {
+			if (error?.response?.data?.message) {
+				setSuccess(null);
+				setError(error.response.data.message);
+			}
 		}
 	};
 
@@ -100,19 +107,26 @@ export default function AccountForm({ _username, _email, submitLabel, formType }
 			formData.get("password") ||
 			formData.get("confirm_password")
 		) {
-			const response = await axios({
-				method: "POST",
-				url: `/api/accounts/${pathname.split("/admin/accounts/edit/")[1]}`,
-				headers: { "Content-Type": "application/json" },
-				data: formData,
-			});
+			try {
+				const response = await axios({
+					method: "POST",
+					url: `/api/accounts/${pathname.split("/admin/accounts/edit/")[1]}`,
+					headers: { "Content-Type": "application/json" },
+					data: formData,
+				});
 
-			if (response?.data) {
-				setError(null);
-				return setSuccess("Successfully updated");
-			} else {
-				setSuccess(null);
-				return setError("Failed to update");
+				if (response?.data) {
+					setError(null);
+					return setSuccess("Successfully updated");
+				} else {
+					setSuccess(null);
+					return setError("Failed to update");
+				}
+			} catch (error: any) {
+				if (error?.response?.data?.message) {
+					setSuccess(null);
+					setError(error.response.data.message);
+				}
 			}
 		}
 	};

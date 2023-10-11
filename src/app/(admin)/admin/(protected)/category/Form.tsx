@@ -16,6 +16,7 @@ type Props = {
 export default function CategoryForm({ _name, _slug, submitLabel, formType }: Props) {
 	const [name, setName] = useState<string>(_name || "");
 	const [slug, setSlug] = useState<string>(_slug || "");
+	const [image, setImage] = useState<string>("");
 	const [error, setError] = useState<string | null>(null);
 	const [success, setSuccess] = useState<string | null>(null);
 	const pathname = usePathname();
@@ -32,19 +33,26 @@ export default function CategoryForm({ _name, _slug, submitLabel, formType }: Pr
 		formData.append("name", name);
 		formData.append("slug", slug);
 
-		const response = await axios({
-			method: "POST",
-			url: "/api/category",
-			headers: { "Content-Type": "application/json" },
-			data: formData,
-		});
+		try {
+			const response = await axios({
+				method: "POST",
+				url: "/api/category",
+				headers: { "Content-Type": "application/json" },
+				data: formData,
+			});
 
-		if (response?.data) {
-			setError(null);
-			return setSuccess("Successfully created");
-		} else {
-			setSuccess(null);
-			return setError("Failed to create");
+			if (response?.data) {
+				setError(null);
+				return setSuccess("Successfully created");
+			} else {
+				setSuccess(null);
+				return setError("Failed to create");
+			}
+		} catch (error: any) {
+			if (error?.response?.data?.message) {
+				setSuccess(null);
+				setError(error.response.data.message);
+			}
 		}
 	};
 
@@ -138,21 +146,17 @@ export default function CategoryForm({ _name, _slug, submitLabel, formType }: Pr
 				{/* Image */}
 				<div className="flex flex-col gap-y-3">
 					<label
-						htmlFor="password"
+						htmlFor="image"
 						className="font-medium flex flex-row items-center gap-x-2"
 					>
 						<FaImage size={14} />
-						Password
+						Image
 					</label>
 					<input
-						type="password"
-						name="password"
-						id="password"
-						required
-						placeholder="Enter Password"
+						type="file"
+						name="image"
+						id="image"
 						className="px-6 py-3 border border-disable-color rounded-md"
-						value={"password"}
-						onChange={(e: ChangeEvent<HTMLInputElement>) => {}}
 					/>
 				</div>
 

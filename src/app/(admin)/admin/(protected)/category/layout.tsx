@@ -8,6 +8,6 @@ async function CategoryLayout({ children }: { children: React.ReactNode }) {
 		return redirect("/admin/login");
 	}
 
-	return <div>{children}</div>;
+	return <div className="w-full">{children}</div>;
 }
 export default CategoryLayout;

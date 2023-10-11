@@ -1,14 +1,14 @@
 "use client";
 
 import DataTable from "@/components/DataTable";
-import { useAccounts } from "@/hooks/useAccount";
+import { useCategories } from "@/hooks/useCategory";
 import { GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import Link from "next/link";
 
 const columns: GridColDef[] = [
 	{ field: "id", headerName: "ID", width: 250 },
-	{ field: "username", headerName: "Username", width: 160 },
-	{ field: "email", headerName: "Email", width: 230 },
+	{ field: "name", headerName: "Name", width: 230 },
+	{ field: "slug", headerName: "Slug", width: 230 },
 	{
 		field: "createdAt",
 		headerName: "Created At",
@@ -32,13 +32,13 @@ const columns: GridColDef[] = [
 			return (
 				<div className="flex flex-row justify-center items-center gap-x-2">
 					<Link
-						href={`/admin/accounts/edit/${params.id}`}
+						href={`/admin/category/edit/${params.id}`}
 						className="bg-orange text-white p-2 hover:bg-primary"
 					>
 						Edit
 					</Link>
 					<Link
-						href={`/admin/accounts?id=${params.id}&action=delete&showModal=true`}
+						href={`/admin/category?id=${params.id}&action=delete&showModal=true`}
 						className="bg-body-color text-white p-2 hover:bg-primary"
 					>
 						Delete
@@ -50,7 +50,7 @@ const columns: GridColDef[] = [
 ];
 
 export default function AllCategories() {
-	const { data, isLoading } = useAccounts();
+	const { data, isLoading } = useCategories();
 
 	if (isLoading || !data) return "Loading...";
 

@@ -9,7 +9,7 @@ export function useCategories() {
 }
 
 export function useCategoryById(id: string) {
-	const { data, isLoading, error } = useSWR(`/api/accounts/${id}`, fetcher);
+	const { data, isLoading, error } = useSWR(`/api/category/${id}`, fetcher);
 
 	return { data, isLoading, error };
 }
