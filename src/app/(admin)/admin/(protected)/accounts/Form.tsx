@@ -112,7 +112,7 @@ export default function AccountForm({ _username, _email, submitLabel, formType }
 				return setSuccess("Successfully updated");
 			} else {
 				setSuccess(null);
-				return setError("Failed to create");
+				return setError("Failed to update");
 			}
 		}
 	};

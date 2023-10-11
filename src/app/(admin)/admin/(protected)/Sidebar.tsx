@@ -66,7 +66,7 @@ export default function Sidebar({}: Props) {
 										href="/admin/category/new"
 										className="w-full ml-8 text-[18px] font-heading inline-block px-8 py-1"
 									>
-										New Account
+										New Category
 									</Link>
 								</li>
 							</ul>
