@@ -78,10 +78,10 @@ export default function LoginForm() {
 					<p className="bg-accent-red px-4 py-2 rounded-md text-white">{error}</p>
 				</div>
 			)}
-			<div className="px-4 py-6">
+			<div className="px-4 py-6 my-5">
 				<button
 					onClick={onLogIn}
-					className="w-full rounded-lg bg-primary font-bold font-heading text-[18px] text-white px-6 py-3 hover:bg-accent-green transition-colors"
+					className="w-full rounded-lg bg-primary font-bold font-heading text-[20px] text-white px-6 py-4 hover:bg-orange transition-colors"
 				>
 					Login
 				</button>
