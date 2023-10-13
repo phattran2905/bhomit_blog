@@ -1,11 +1,13 @@
 "use client";
 
+import "react-quill/dist/quill.snow.css";
 import { ChangeEvent, useState } from "react";
 import { FaCode, FaImage, FaTimes } from "react-icons/fa";
 import { FaTableList, FaTarp } from "react-icons/fa6";
 import axios from "axios";
 import { usePathname } from "next/navigation";
 import { useCategories } from "@/hooks/useCategory";
+import ReactQuill from "react-quill";
 
 type Props = {
 	_title?: string;
@@ -22,6 +24,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 	const [selectedCatID, setSelectedCatID] = useState<string>("");
 	const [tags, setTags] = useState<string[]>(["T1", "T2", "T3"]);
 	const [tagInput, setTagInput] = useState<string>("");
+	const [body, setBody] = useState<string>("");
 
 	const onCreateNewTag = async () => {
 		setError(null);
@@ -115,7 +118,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 				</div>
 
 				{/* Body */}
-				<div className="flex flex-col gap-y-3">
+				<div className="flex flex-col gap-y-3 py-2 h-full">
 					<label
 						htmlFor="body"
 						className="font-medium flex flex-row items-center gap-x-2"
@@ -124,14 +127,21 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 						Body
 						<span className="text-accent-red">*</span>
 					</label>
-					<textarea
+					{/* <textarea
 						name="body"
 						id="body"
 						required
 						placeholder="Enter Body"
 						className="px-6 py-3 border border-disable-color rounded-md"
 						onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setTitle(e.target.value)}
-					></textarea>
+					></textarea> */}
+
+					<ReactQuill
+						theme="snow"
+						value={body}
+						onChange={setBody}
+						className="h-full"
+					/>
 				</div>
 
 				{/* Errors */}
@@ -244,6 +254,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 						className="px-6 py-3 border border-disable-color rounded-md"
 					/>
 				</div>
+				{/* Created & Updated */}
 				<div className="border-y py-2">
 					{/* Created At */}
 					<div className="flex flex-row justify-between items-center my-2">
@@ -256,6 +267,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 						<span className="text-[15px] italic">Oct 23, 2023</span>
 					</div>
 				</div>
+				{/* Create Button */}
 				<div className=" flex flex-row justify-center">
 					<button
 						onClick={formType === "create" ? onCreateNewTag : onUpdateTag}

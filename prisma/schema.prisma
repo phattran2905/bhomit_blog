@@ -34,8 +34,6 @@ model Tag {
   name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Post      Post?    @relation(fields: [postId], references: [id])
-  postId    String?  @db.ObjectId
 }
 
 model Post {
@@ -43,12 +41,12 @@ model Post {
   title        String
   accountId    String   @db.ObjectId
   categoryId   String   @db.ObjectId
-  tagList      String[] @default([])
+  tags         String[] @default([])
+  views        Int      @default(0)
   thumbnailImg String?
   content      String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   account      Account  @relation(fields: [accountId], references: [id])
   category     Category @relation(fields: [categoryId], references: [id])
-  tags         Tag[]
 }
