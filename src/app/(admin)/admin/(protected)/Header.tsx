@@ -1,16 +1,45 @@
 "use client";
 import { FaBell, FaCog, FaSignOutAlt } from "react-icons/fa";
 import { signOut } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useCurrentAccount from "@/hooks/useCurrentAccount";
+import { RiMenuFoldFill, RiMenuUnfoldFill } from "react-icons/ri";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
 	const [openMenu, setOpenMenu] = useState<boolean>(false);
 	const { data: account, isLoading } = useCurrentAccount();
+	const router = useRouter();
+	const pathname = usePathname();
+	const [showSidebar, setShowSidebar] = useState<boolean>(true);
+
+	useEffect(() => {
+		{
+			const params = new URLSearchParams();
+			if (showSidebar) {
+				params.set("showSidebar", "true");
+			} else {
+				params.set("showSidebar", "false");
+			}
+			router.push(pathname + "?" + params);
+		}
+	}, [showSidebar]);
 
 	if (!isLoading && account) {
 		return (
-			<div className="bg-white border-b p-4 border-b-disable-color flex flex-row justify-end items-center">
+			<div className="bg-white border-b p-4 border-b-disable-color flex flex-row justify-between items-center">
+				<div>
+					<button
+						onClick={() => (showSidebar ? setShowSidebar(false) : setShowSidebar(true))}
+						className={`font-bold flex flex-row justify-center items-center p-2 border rounded-md transition-colors ${
+							showSidebar
+								? "text-primary hover:text-white hover:bg-primary"
+								: "text-white bg-primary hover:bg-accent-red"
+						}`}
+					>
+						{showSidebar ? <RiMenuFoldFill size={18} /> : <RiMenuUnfoldFill size={18} />}
+					</button>
+				</div>
 				<div className="flex flex-row items-center gap-x-3">
 					<a href="#">
 						<FaBell size={24} />

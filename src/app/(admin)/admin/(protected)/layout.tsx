@@ -4,10 +4,10 @@ import Header from "./Header";
 export default function layout({ children }: { children: React.ReactNode }) {
 	return (
 		<>
-			<div className="flex flex-row items-stretch min-h-screen bg-image-placeholder">
+			<div className="min-w-full min-h-full flex flex-row item-stretch">
 				<Sidebar />
 
-				<div className="basis-11/12 relative">
+				<div className="w-full relative bg-image-placeholder">
 					{/* Header */}
 					<Header />
 					{/* Main content */}

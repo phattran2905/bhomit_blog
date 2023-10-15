@@ -143,24 +143,26 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 						<span className="text-accent-red">*</span>
 					</label>
 
-					<CKEditor
-						editor={ClassicEditor}
-						data="<p>Hello from CKEditor&nbsp;5!</p>"
-						onReady={(editor) => {
-							// You can store the "editor" and use when it is needed.
-							console.log("Editor is ready to use!", editor);
-						}}
-						onChange={(event, editor) => {
-							const data = editor.getData();
-							console.log({ event, editor, data });
-						}}
-						onBlur={(event, editor) => {
-							console.log("Blur.", editor);
-						}}
-						onFocus={(event, editor) => {
-							console.log("Focus.", editor);
-						}}
-					/>
+					<div className="h-[500px]">
+						<CKEditor
+							editor={ClassicEditor}
+							data="<p>Hello from CKEditor&nbsp;5!</p>"
+							onReady={(editor) => {
+								// You can store the "editor" and use when it is needed.
+								console.log("Editor is ready to use!", editor);
+							}}
+							onChange={(event, editor) => {
+								const data = editor.getData();
+								console.log({ event, editor, data });
+							}}
+							onBlur={(event, editor) => {
+								console.log("Blur.", editor);
+							}}
+							onFocus={(event, editor) => {
+								console.log("Focus.", editor);
+							}}
+						/>
+					</div>
 				</div>
 			</div>
 
@@ -176,15 +178,16 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 						<span className="text-accent-red">*</span>
 					</label>
 					<select
-						name="category"
 						id="category"
+						name="category"
 						className="p-2 border border-disable-color rounded-md"
+						defaultValue={categories ? categories[0]?.id : ""}
 					>
 						{categories &&
-							categories.map((category: any) => (
+							categories.map((category: { id: string; name: string }) => (
 								<option
+									id={category.id}
 									value={category.id}
-									selected={category.id === selectedCatID ? true : false}
 									onSelect={() => setSelectedCatID(category.id)}
 								>
 									{category.name}
@@ -226,7 +229,10 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 					{tags.length > 0 && (
 						<div className="flex flex-row flex-wrap gap-2 py-2">
 							{tags.map((tag: string, index: number) => (
-								<div className="flex flex-row items-stretch">
+								<div
+									id={index.toString()}
+									className="flex flex-row items-stretch"
+								>
 									<span className="text-[14px] bg-disable-color px-4 py-1">{tag}</span>
 									<button
 										onClick={() => {
