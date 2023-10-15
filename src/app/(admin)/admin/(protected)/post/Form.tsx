@@ -1,13 +1,15 @@
 "use client";
 
-import "react-quill/dist/quill.snow.css";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { FaCode, FaImage, FaTimes } from "react-icons/fa";
 import { FaTableList, FaTarp } from "react-icons/fa6";
 import axios from "axios";
 import { usePathname } from "next/navigation";
 import { useCategories } from "@/hooks/useCategory";
-import ReactQuill from "react-quill";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Essentials } from "@ckeditor/ckeditor5-essentials";
+import { Paragraph } from "@ckeditor/ckeditor5-paragraph";
 
 type Props = {
 	_title?: string;
@@ -24,9 +26,8 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 	const [selectedCatID, setSelectedCatID] = useState<string>("");
 	const [tags, setTags] = useState<string[]>(["T1", "T2", "T3"]);
 	const [tagInput, setTagInput] = useState<string>("");
-	const [body, setBody] = useState<string>("");
 
-	const onCreateNewTag = async () => {
+	const onCreateNewPost = async () => {
 		setError(null);
 		setSuccess(null);
 
@@ -36,31 +37,32 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 
 		const formData = new FormData();
 		formData.append("title", title);
+		console.log(categories);
+		console.log(tags);
+		// try {
+		// 	const response = await axios({
+		// 		method: "POST",
+		// 		url: "/api/tag",
+		// 		headers: { "Content-Type": "application/json" },
+		// 		data: formData,
+		// 	});
 
-		try {
-			const response = await axios({
-				method: "POST",
-				url: "/api/tag",
-				headers: { "Content-Type": "application/json" },
-				data: formData,
-			});
-
-			if (response?.data) {
-				setError(null);
-				return setSuccess("Successfully created");
-			} else {
-				setSuccess(null);
-				return setError("Failed to create");
-			}
-		} catch (error: any) {
-			if (error?.response?.data?.message) {
-				setSuccess(null);
-				setError(error.response.data.message);
-			}
-		}
+		// 	if (response?.data) {
+		// 		setError(null);
+		// 		return setSuccess("Successfully created");
+		// 	} else {
+		// 		setSuccess(null);
+		// 		return setError("Failed to create");
+		// 	}
+		// } catch (error: any) {
+		// 	if (error?.response?.data?.message) {
+		// 		setSuccess(null);
+		// 		setError(error.response.data.message);
+		// 	}
+		// }
 	};
 
-	const onUpdateTag = async () => {
+	const onUpdatePost = async () => {
 		setError(null);
 		setSuccess(null);
 
@@ -95,6 +97,19 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 	return (
 		<div className="py-12 px-10 bg-white flex flex-row justify-between gap-x-6">
 			<div className="w-3/4 flex flex-col gap-y-6">
+				{/* Errors */}
+				{error && (
+					<p className="p-3 rounded-md bg-opacity-90 text-white bg-accent-red text-[14px]">
+						{error}
+					</p>
+				)}
+
+				{/* Success */}
+				{success && (
+					<p className="p-3 rounded-md bg-opacity-90 text-white bg-accent-green text-[14px]">
+						{success}
+					</p>
+				)}
 				{/* Title */}
 				<div className="flex flex-col gap-y-3">
 					<label
@@ -118,7 +133,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 				</div>
 
 				{/* Body */}
-				<div className="flex flex-col gap-y-3 py-2 h-full">
+				<div className="flex flex-col gap-y-3 py-2">
 					<label
 						htmlFor="body"
 						className="font-medium flex flex-row items-center gap-x-2"
@@ -127,39 +142,29 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 						Body
 						<span className="text-accent-red">*</span>
 					</label>
-					{/* <textarea
-						name="body"
-						id="body"
-						required
-						placeholder="Enter Body"
-						className="px-6 py-3 border border-disable-color rounded-md"
-						onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setTitle(e.target.value)}
-					></textarea> */}
 
-					<ReactQuill
-						theme="snow"
-						value={body}
-						onChange={setBody}
-						className="h-full"
+					<CKEditor
+						editor={ClassicEditor}
+						data="<p>Hello from CKEditor&nbsp;5!</p>"
+						onReady={(editor) => {
+							// You can store the "editor" and use when it is needed.
+							console.log("Editor is ready to use!", editor);
+						}}
+						onChange={(event, editor) => {
+							const data = editor.getData();
+							console.log({ event, editor, data });
+						}}
+						onBlur={(event, editor) => {
+							console.log("Blur.", editor);
+						}}
+						onFocus={(event, editor) => {
+							console.log("Focus.", editor);
+						}}
 					/>
 				</div>
-
-				{/* Errors */}
-				{error && (
-					<p className="p-3 rounded-md bg-opacity-90 text-white bg-accent-red text-[14px]">
-						{error}
-					</p>
-				)}
-
-				{/* Success */}
-				{success && (
-					<p className="p-3 rounded-md bg-opacity-90 text-white bg-accent-green text-[14px]">
-						{success}
-					</p>
-				)}
 			</div>
 
-			<div className="w-1/4 p-4 border flex flex-col gap-y-5">
+			<div className="w-1/4 px-4 flex flex-col gap-y-5 border-x">
 				{/* Category */}
 				<div className="flex flex-col gap-y-3">
 					<label
@@ -173,7 +178,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 					<select
 						name="category"
 						id="category"
-						className="px-6 py-3 border border-disable-color rounded-md"
+						className="p-2 border border-disable-color rounded-md"
 					>
 						{categories &&
 							categories.map((category: any) => (
@@ -203,7 +208,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 							id="tag"
 							required
 							placeholder="Enter Title"
-							className="w-full px-6 py-3 border border-disable-color rounded-md"
+							className="w-full p-3 border border-disable-color rounded-tl-md rounded-bl-md"
 							value={tagInput}
 							onChange={(e: ChangeEvent<HTMLInputElement>) => setTagInput(e.target.value)}
 						/>
@@ -212,7 +217,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 								setTagInput("");
 								setTags([...tags, tagInput]);
 							}}
-							className="bg-primary py-2 px-4 font-medium text-white hover:bg-accent-green"
+							className="bg-primary p-2 font-medium text-white hover:bg-accent-green text-[14px]"
 						>
 							Add
 						</button>
@@ -270,7 +275,7 @@ export default function TagForm({ _title, submitLabel, formType }: Props) {
 				{/* Create Button */}
 				<div className=" flex flex-row justify-center">
 					<button
-						onClick={formType === "create" ? onCreateNewTag : onUpdateTag}
+						onClick={formType === "create" ? onCreateNewPost : onUpdatePost}
 						className="w-full px-4 py-2 rounded-md font-medium text-[18px] bg-primary text-white hover:bg-orange transition-colors capitalize"
 					>
 						{submitLabel}
